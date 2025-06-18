@@ -1,0 +1,33 @@
+.head{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background: black;
+}
+
+.alayout{
+    text-decoration: none;
+    color: white;
+}
+
+.a1 {
+    text-decoration: none;
+    color: black;
+}
+
+.cuadrado{
+    display: grid;
+    grid-template-columns: 250px 250px 250px 250px;
+    margin-top: 20px;
+}
+
+.personaje {
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
