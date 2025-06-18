@@ -10,6 +10,7 @@ import * as $favoritos from "./routes/favoritos.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $VisorChar from "./islands/VisorChar.tsx";
 import * as $VisorChars from "./islands/VisorChars.tsx";
+import * as $VisorFavs from "./islands/VisorFavs.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -24,6 +25,7 @@ const manifest = {
   islands: {
     "./islands/VisorChar.tsx": $VisorChar,
     "./islands/VisorChars.tsx": $VisorChars,
+    "./islands/VisorFavs.tsx": $VisorFavs,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

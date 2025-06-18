@@ -9,7 +9,7 @@ export const handler: Handlers = {
     GET: async (req: Request, ctx: FreshContext<unknown, Personaje>) => {
         const id = ctx.params.id;
 
-        const characters_api = await Axios.get<Personaje_API[]>("https://hp-api.onrender.com/api/characters/"+id);
+        const characters_api = await Axios.get<Personaje_API[]>(`https://hp-api.onrender.com/api/characters/${id}`);
         const data = characters_api.data[0];
 
         const cookies = getCookies(req.headers);
