@@ -7,34 +7,39 @@ import VisorChar from "../../islands/VisorChar.tsx";
 
 export const handler: Handlers = {
     GET: async (req: Request, ctx: FreshContext<unknown, Personaje>) => {
-        const id = ctx.params.id;
+        try{
+            const id:string = ctx.params.id;
 
-        const characters_api = await Axios.get<Personaje_API[]>(`https://hp-api.onrender.com/api/characters/${id}`);
-        const data = characters_api.data[0];
+            const characters_api= await Axios.get<Personaje_API[]>(`https://hp-api.onrender.com/api/characters/`+id);
+            const data = characters_api.data[0];
 
-        const cookies = getCookies(req.headers);
-        const cookie: Personaje[] = JSON.parse(cookies.hp_favs);
+            const cookies = getCookies(req.headers);
+            const cookie: Personaje[] = JSON.parse(cookies.hp_favs);
 
-        const signal = new Signal(false);
+            const signal = new Signal(false);
 
-        cookie.forEach((c) => {
-            if(c.character.id === data.id){
-                signal.value = true;
+            cookie.forEach((c) => {
+                if(c.character.id === data.id){
+                    signal.value = true;
+                }
+            })
+
+            const character: Personaje = {
+                character: {
+                    id: data.id,
+                    name: data.name,
+                    image: data.image,
+                    house: data.house,
+                    alive: data.alive,
+                },
+                added: signal,
             }
-        })
 
-        const character: Personaje = {
-            character: {
-                id: data.id,
-                name: data.name,
-                image: data.image,
-                house: data.house,
-                alive: data.alive,
-            },
-            added: signal,
+            return ctx.render(character);
         }
-
-        return ctx.render(character);
+        catch(e){
+            throw new Error("Ha habido un problema");
+        }
     }
 }
 
